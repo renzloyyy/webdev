@@ -3,30 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Navbar</title>
-    <script src="https://cdn.tailwindcss.com"></script> {{-- Include Tailwind CSS --}}
+    <script src="https://cdn.tailwindcss.com"></script> 
     <style>
-        /* Smooth transition for mobile menu */
+        /* Mobile menu styles */
         .mobile-menu {
-            transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
-            max-height: 0;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: rgba(31, 41, 55, 0.95); /* Semi-transparent dark background */
+            z-index: 50;
             opacity: 0;
-            overflow: hidden;
+            visibility: hidden;
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
         }
         .mobile-menu.open {
-            max-height: 500px;
             opacity: 1;
+            visibility: visible;
         }
     </style>
 </head>
 <body class="bg-gray-100">
 
     <!-- Navigation Bar -->
-    <nav class="bg-gray-900 text-white">
+    <nav class="relative bg-gray-900 text-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
+            <div class="flex justify-between items-center h-16 relative">
                 <!-- Logo -->
-                <a href="#" class="text-2xl font-bold">MyLogo</a>
+                <a href="{{ route('home') }}" class="flex items-center space-x-2">
+                    <img src="{{asset('logo.png')}}" alt="Logo" class="w-20 h-20"> 
+                    <span class="text-2xl font-bold">Renzloyyy</span>
+                </a>
+
 
                 <!-- Desktop Navigation Links -->
                 <div class="hidden md:flex space-x-6">
@@ -49,12 +57,12 @@
         </div>
 
         <!-- Mobile Navigation Links -->
-        <div id="mobile-menu" class="mobile-menu bg-gray-800 text-white px-4 py-2 md:hidden flex flex-col space-y-2">
+        <div id="mobile-menu" class="mobile-menu text-white px-4 py-2 md:hidden flex flex-col space-y-2 absolute w-full">
             <a href="{{route('home')}}" class="py-2 border-b border-gray-600 hover:text-gray-400 transition duration-300">Home</a>
             <a href="#" class="py-2 border-b border-gray-600 hover:text-gray-400 transition duration-300">About</a>
             <a href="{{route('services')}}" class="py-2 border-b border-gray-600 hover:text-gray-400 transition duration-300">Services</a>
             <a href="{{route('contact')}}" class="py-2 hover:text-gray-400 transition duration-300">Contact</a>
-             <a href="{{ route('personal') }}" class="hover:text-gray-400 transition duration-300">Personal</a>
+            <a href="{{ route('personal') }}" class="hover:text-gray-400 transition duration-300">Personal</a>
         </div>
     </nav>
 
